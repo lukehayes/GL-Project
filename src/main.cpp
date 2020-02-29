@@ -1,7 +1,7 @@
 ﻿//#if _WIN32
 //    #define GLEW_STATIC
-//    #include "eglew.h"
 //    #include "glew.h"
+//    #include "eglew.h"
 //#endif
 
 #include <iostream>
@@ -14,10 +14,11 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	constexpr int WIDTH = 800;
+	constexpr int HEIGHT = 600;
 
-	SDL_Window* window;
-	SDL_Renderer* renderer;
-	SDL_CreateWindowAndRenderer(800, 600, SDL_WINDOW_RESIZABLE, &window, &renderer);
+
+	SDL_Window* window = SDL_CreateWindow("Game Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
 
 	SDL_Event event;
 
@@ -28,12 +29,8 @@ int main(int argc, char* argv[])
 			break;
 		}
 
-		SDL_SetRenderDrawColor(renderer, 0, 150, 200, 255);
-		SDL_RenderClear(renderer);
-		SDL_RenderPresent(renderer);
 	}
 
-	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 	return 0;
