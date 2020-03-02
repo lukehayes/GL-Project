@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : Top-level CMake project file, do global configuration
 # and include sub-projects here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.7)
 project ("app")
 
 # ------------------------------------------------------
@@ -58,6 +58,16 @@ if(APPLE)
     # Add source to this project's executable.
     add_executable (app "${SRC_FILE}")
     target_link_libraries (app ${SDL2_LIBRARIES})
+
+    # ------------------------------------------------------
+    # FIND OPENGL
+    # ------------------------------------------------------
+    find_package (OPENGL)
+    if (OPENGL_FOUND)
+      include_directories(${OPENGL_INCLUDE_DIR})
+      target_link_libraries (app ${OPENGL_LIBRARIES})
+    endif (OPENGL_FOUND)
+
 
 endif(APPLE)
 
