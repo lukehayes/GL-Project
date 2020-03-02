@@ -1,8 +1,9 @@
-﻿//#if _WIN32
-//    #define GLEW_STATIC
-//    #include "glew.h"
-//    #include "eglew.h"
-//#endif
+﻿#ifdef _WIN32
+    #define GLEW_STATIC
+    #include "glew.h"
+#elif __UNIX__
+    #include <OpenGL/gl3.h>
+#endif
 
 #include <iostream>
 #include "SDL.h"
@@ -17,10 +18,26 @@ int main(int argc, char* argv[])
 	constexpr int WIDTH = 800;
 	constexpr int HEIGHT = 600;
 
+	SDL_Window* window = SDL_CreateWindow(
+            "Game Window",
+            SDL_WINDOWPOS_CENTERED,
+            SDL_WINDOWPOS_CENTERED,
+            800,
+            600,
+            SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
+    );
+    SDL_GLContext glContext = SDL_GL_CreateContext(window);
 
-	SDL_Window* window = SDL_CreateWindow("Game Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
+
+    // Check that the window was successfully created
+    if (window == NULL) {
+        // In the case that the window could not be made...
+        printf("Could not create window: %s\n", SDL_GetError());
+        return 1;
+    }
 
 	SDL_Event event;
+    float rt = 0.0;
 
 	while (1) {
 
@@ -29,10 +46,17 @@ int main(int argc, char* argv[])
 			break;
 		}
 
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(1.0, 1.0, 1.0, 1.0);
+
+        SDL_GL_SwapWindow(window);
 	}
 
+    SDL_GL_DeleteContext(glContext);
 	SDL_DestroyWindow(window);
-	SDL_Quit();
+
+    SDL_Quit();
+
 	return 0;
 }
 
