@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
             SDL_WINDOWPOS_CENTERED,
             800,
             600,
-            SDL_WINDOW_OPENGL
+            SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
     );
     SDL_GLContext glContext = SDL_GL_CreateContext(window);
 
@@ -36,6 +36,7 @@ int main(int argc, char* argv[])
 	SDL_Event event;
 
 	while (1) {
+
 		SDL_PollEvent(&event);
 		if (event.type == SDL_QUIT) {
 			break;
@@ -44,11 +45,13 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(1.0, 1.0, 1.0, 1.0);
         SDL_GL_SwapWindow(window);
+
 	}
     
-    SDL_GL_DeleteContext(window);
 	SDL_DestroyWindow(window);
+    SDL_GL_DeleteContext(window);
 	SDL_Quit();
+
 	return 0;
 }
 
