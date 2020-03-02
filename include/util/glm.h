@@ -1,10 +1,11 @@
-#ifndef UTIL_GLM_H
-#define UTIL_GLM_H
+#ifndef _UTIL_GLM_H
+#define _UTIL_GLM_H
 
-/**
-* Include of all of necessary glm header files in this one
-*/
-#include <glm/glm.hpp>
-#include <glm/gtc/type_ptr.hpp>
+// Bring in all of the headers into one location
 
-#endif // !UTIL_GLM_H
+#include "include\glm\vec2.hpp"
+#include "include\glm\vec3.hpp"
+#include "include\glm\mat4x4.hpp"
+#include "include\glm\gtc\matrix_transform.hpp"
+
+#endif
