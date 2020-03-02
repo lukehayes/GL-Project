@@ -16,6 +16,10 @@ SET(CORE_INCLUDES
 	"${PROJECT_SOURCE_DIR}/deps/libs/glm"
 )
 
+# All of the sub directory names found in the src folder
+SET(SRC_LIBS io)
+
+
 # ------------------------------------------------------
 # WINDOWS
 # ------------------------------------------------------
@@ -55,9 +59,11 @@ if(APPLE)
 		${SDL2_INCLUDE_DIR}
     )
 
+    add_subdirectory("${PROJECT_SOURCE_DIR}/src/io")
+
     # Add source to this project's executable.
     add_executable (app "${SRC_FILE}")
-    target_link_libraries (app ${SDL2_LIBRARIES})
+    target_link_libraries (app ${SDL2_LIBRARIES} io)
 
     # ------------------------------------------------------
     # FIND OPENGL
