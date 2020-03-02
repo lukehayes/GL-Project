@@ -2,11 +2,9 @@
     #define GLEW_STATIC
     #include "eglew.h"
     #include "glew.h"
-
 #elif __APPLE__
-    #include "OpenGL/gl3.h"
+    #include <OpenGL/gl3.h>
 #endif
-
 #include <iostream>
 #include "SDL.h"
 
@@ -17,26 +15,38 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	SDL_Window* window = SDL_CreateWindow(
+            "Game Window",
+            SDL_WINDOWPOS_CENTERED,
+            SDL_WINDOWPOS_CENTERED,
+            800,
+            600,
+            SDL_WINDOW_OPENGL
+    );
+    SDL_GLContext glContext = SDL_GL_CreateContext(window);
 
-	SDL_Window* window;
-	SDL_Renderer* renderer;
-	SDL_CreateWindowAndRenderer(800, 600, SDL_WINDOW_RESIZABLE, &window, &renderer);
+
+    // Check that the window was successfully created
+    if (window == NULL) {
+        // In the case that the window could not be made...
+        printf("Could not create window: %s\n", SDL_GetError());
+        return 1;
+    }
 
 	SDL_Event event;
 
 	while (1) {
-
 		SDL_PollEvent(&event);
 		if (event.type == SDL_QUIT) {
 			break;
 		}
 
-		SDL_SetRenderDrawColor(renderer, 0, 150, 200, 255);
-		SDL_RenderClear(renderer);
-		SDL_RenderPresent(renderer);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(1.0, 1.0, 1.0, 1.0);
+        SDL_GL_SwapWindow(window);
 	}
-
-	SDL_DestroyRenderer(renderer);
+    
+    SDL_GL_DeleteContext(window);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 	return 0;
