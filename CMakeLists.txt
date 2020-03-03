@@ -31,16 +31,18 @@ if (WIN32)
         ${CORE_INCLUDES}
     )
     include_directories(${INC_DIRS})
-    link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
+    link_directories(
+        ${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs
+        ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/libs
+     )
 
     # Add source to this project's executable.
     add_executable (app "${SRC_FILE}")
 
-    target_link_libraries(app SDL2.lib)
     target_link_libraries(app SDL2main.lib)
+    target_link_libraries(app SDL2.lib)
 
 endif(WIN32)
-
 
 # ------------------------------------------------------
 # OSX
@@ -65,15 +67,16 @@ if(APPLE)
     add_executable (app "${SRC_FILE}")
     target_link_libraries (app ${SDL2_LIBRARIES} io)
 
-    # ------------------------------------------------------
-    # FIND OPENGL
-    # ------------------------------------------------------
-    find_package (OPENGL)
-    if (OPENGL_FOUND)
-      include_directories(${OPENGL_INCLUDE_DIR})
-      target_link_libraries (app ${OPENGL_LIBRARIES})
-    endif (OPENGL_FOUND)
-
-
 endif(APPLE)
 
+
+# ------------------------------------------------------
+# NEDED FOR WINDOWS AND OSX
+# ------------------------------------------------------
+# FIND OPENGL
+# ------------------------------------------------------
+find_package (OPENGL)
+if (OPENGL_FOUND)
+  include_directories(${OPENGL_INCLUDE_DIR})
+  target_link_libraries (app ${OPENGL_LIBRARIES})
+endif (OPENGL_FOUND)
