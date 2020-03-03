@@ -16,8 +16,8 @@ namespace Shader {
 		~Shader() {};
 
 		void setShaderSource() {
-			this->vertexShaderSource = IO::readFile("assets/shaders/debug-vertex.txt");
-			this->fragShaderSource = IO::readFile("assets/shaders/debug-fragment.txt");
+			this->vertexShaderSource = IO::readFile("../assets/shaders/debug-vertex.txt");
+			this->fragShaderSource = IO::readFile("../assets/shaders/debug-fragment.txt");
 		}
 
 		void buildShader() {

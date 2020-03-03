@@ -24,23 +24,30 @@ SET(SRC_LIBS io)
 # WINDOWS
 # ------------------------------------------------------
 if (WIN32)
+
     message("Running on Windows")
+
     set(INC_DIRS
         ${PROJECT_SOURCE_DIR}/deps/libs/SDL/include
         ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/include
         ${CORE_INCLUDES}
     )
+    
     include_directories(${INC_DIRS})
+
     link_directories(
         ${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs
         ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/libs
      )
 
+    add_subdirectory("${PROJECT_SOURCE_DIR}/src/io")
+
     # Add source to this project's executable.
     add_executable (app "${SRC_FILE}")
 
     target_link_libraries(app SDL2main.lib)
-    target_link_libraries(app SDL2.lib)
+    target_link_libraries(app SDL2.lib io)
+    target_link_libraries(app glew32s.lib)
 
 endif(WIN32)
 
