@@ -24,8 +24,11 @@ namespace App {
 
 		~Window() {
 
-			std::cout << "Window Destroyed" << std::endl;
 			SDL_DestroyWindow(m_window);
+			std::cout << "Window Destroyed" << std::endl;
+
+            SDL_GL_DeleteContext(m_context);
+			std::cout << "GL Context Destroyed" << std::endl;
 		}
 
 		/*
@@ -40,6 +43,11 @@ namespace App {
 					m_height,
 					SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
 			);
+
+            SDL_GL_SetAttribute (SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+            SDL_GL_SetAttribute (SDL_GL_CONTEXT_MAJOR_VERSION, 3); //OpenGL 3+
+            SDL_GL_SetAttribute (SDL_GL_CONTEXT_MINOR_VERSION, 3); //OpenGL 3.3
+            m_context = SDL_GL_CreateContext(m_window);
 		}
 	
 		/*
@@ -55,6 +63,7 @@ namespace App {
 		int m_height;
 
 		SDL_Window* m_window;
+        SDL_GLContext m_context;
 	};
 }
 
