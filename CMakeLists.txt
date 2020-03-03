@@ -32,7 +32,7 @@ if (WIN32)
         ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/include
         ${CORE_INCLUDES}
     )
-    
+
     include_directories(${INC_DIRS})
 
     link_directories(
@@ -59,6 +59,7 @@ if(APPLE)
 
     # Modules Path
     set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+    set(CMAKE_CXX_FLAGS "-std=c++14")
 
     # Find SDL2 on OSX - must be at top
     find_package (SDL2 REQUIRED)
