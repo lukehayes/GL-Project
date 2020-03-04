@@ -1,10 +1,5 @@
-﻿#ifdef _WIN32
-    #define GLEW_STATIC
-    #include "glew.h"
-#elif __APPLE__
-    #include "OpenGL/gl3.h"
-#endif
-
+﻿
+#include "util/gl.h"
 #include "SDL.h"
 #include "app/window.h"
 

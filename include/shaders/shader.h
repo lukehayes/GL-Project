@@ -3,8 +3,8 @@
 
 #include <string>
 #include "io/file-io.h"
+#include "util/gl.h"
 #include "util/log.h"
-#include "OpenGL/gl3.h"
 
 namespace Shader {
 
