@@ -83,7 +83,7 @@ namespace Shader {
 				if (!success)
 				{
 					glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-					Util::log("ERROR::SHADER_COMPILATION_ERROR of type: ", infoLog);
+					Util::log("ERROR::SHADER_LINK_ERROR of type: ", infoLog);
 				}
 			}
 		}
