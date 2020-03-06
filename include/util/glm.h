@@ -3,9 +3,9 @@
 
 // Bring in all of the headers into one location
 
-#include "include\glm\vec2.hpp"
-#include "include\glm\vec3.hpp"
-#include "include\glm\mat4x4.hpp"
-#include "include\glm\gtc\matrix_transform.hpp"
+#include "glm/vec2.hpp"
+#include "glm/vec3.hpp"
+#include "glm/mat4x4.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 #endif
