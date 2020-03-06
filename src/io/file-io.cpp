@@ -3,27 +3,18 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 
 namespace IO {
 
 	std::string readFile(const std::string& file) {
+		std::stringstream buffer;
+		std::ifstream filestream(file);
 
-		std::stringstream contents;
-		std::fstream filestream;
+        buffer << filestream.rdbuf();
 
-		filestream.open(file, std::ios::in);
+        std::string lines(buffer.str());
 
-		if (filestream.is_open()) {
-			std::cout << "File: " << file << " opened." << std::endl;
-			// Lazy way of reading in file contents
-			// but it works
-			contents << filestream.rdbuf();
-		}
-		else {
-			std::cout << "File: " << file << " could not be opened."<< std::endl;
-			return "Reading Failed";
-		}
-
-		return contents.str();
+        return lines;
 	}
 }
