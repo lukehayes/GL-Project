@@ -10,6 +10,7 @@ project ("app")
 SET(SRC_DIR "src")
 SET(SRC_FILE "${SRC_DIR}/main.cpp")
 SET(LIBS_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
+SET(GLM_HEADERS_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
 
 SET(CORE_INCLUDES
 	"${PROJECT_SOURCE_DIR}/include"
@@ -67,6 +68,7 @@ if(APPLE)
     include_directories(
 		${PROJECT_SOURCE_DIR}/include
 		${SDL2_INCLUDE_DIR}
+        ${GLM_HEADERS_DIR}
     )
 
     add_subdirectory("${PROJECT_SOURCE_DIR}/src/io")
