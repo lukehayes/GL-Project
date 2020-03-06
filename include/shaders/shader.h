@@ -48,7 +48,7 @@ namespace Shader {
 
 			// Link the program
 			glLinkProgram(this->shaderProgram);
-			checkCompileErrors(shaderProgram, "SHADER PROGRAM");
+			checkCompileErrors(shaderProgram, "PROGRAM");
 		
 		}
 
