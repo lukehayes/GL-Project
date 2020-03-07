@@ -64,7 +64,7 @@ namespace Shader {
 			glUseProgram(this->shaderProgram);
 		}
 
-		void sendFloat(float val, const char* uniformName) {
+		void setFloat(float val, const char* uniformName) {
 			GLint location = glGetUniformLocation(this->shaderProgram, uniformName);
 			glUniform1f(location, val);
 		}
