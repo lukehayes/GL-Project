@@ -4,6 +4,7 @@
 #include <string>
 #include "io/file-io.h"
 #include "util/gl.h"
+#include "util/glm.h"
 #include "util/log.h"
 
 namespace Shader {
@@ -17,8 +18,8 @@ namespace Shader {
 		~Shader() {};
 
 		void setShaderSource() {
-			this->vertexShaderSource = IO::readFile("../assets/shaders/debug-vertex.txt");
-			this->fragShaderSource = IO::readFile("../assets/shaders/debug-fragment.txt");
+			this->vertexShaderSource = IO::readFile("../../../assets/shaders/debug-vertex.txt");
+			this->fragShaderSource = IO::readFile("../../../assets/shaders/debug-fragment.txt");
 		}
 
 		void buildShader() {
@@ -67,6 +68,12 @@ namespace Shader {
 			GLint location = glGetUniformLocation(this->shaderProgram, uniformName);
 			glUniform1f(location, val);
 		}
+
+		void setMat4(const std::string& name, const glm::mat4& mat) const
+		{
+			glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+		}
+
 
 
 	private:
