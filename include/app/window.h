@@ -48,6 +48,16 @@ namespace App {
             SDL_GL_SetAttribute (SDL_GL_CONTEXT_MAJOR_VERSION, 3); //OpenGL 3+
             SDL_GL_SetAttribute (SDL_GL_CONTEXT_MINOR_VERSION, 3); //OpenGL 3.3
             m_context = SDL_GL_CreateContext(m_window);
+
+
+			if (_WIN32) {
+				GLenum error = glewInit();
+
+				if (!error == GLEW_OK) {
+					std::cout << "GLEW failed to initialize." << std::endl;
+				}
+			}
+
 		}
 	
 		/*
