@@ -14,7 +14,7 @@ SET(GLM_HEADERS_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
 
 SET(CORE_INCLUDES
 	"${PROJECT_SOURCE_DIR}/include"
-	"${PROJECT_SOURCE_DIR}/deps/libs/glm"
+	"${GLM_HEADERS_DIR}"
 )
 
 # All of the sub directory names found in the src folder
