@@ -42,7 +42,7 @@ namespace Core {
             glGenBuffers(1, &m_vbo_id);
             glBindBuffer(GL_ARRAY_BUFFER, m_vbo_id);
 
-            glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 10, nullptr, GL_DYNAMIC_DRAW);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 10, nullptr, GL_STATIC_DRAW);
 
         
         }
@@ -70,9 +70,6 @@ namespace Core {
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(a.positions[0]) * a.positions.size(),  a.positions.data());
             glBufferSubData(GL_ARRAY_BUFFER, sizeof(float) * 3, sizeof(b.positions[0]) * b.positions.size(),  b.positions.data());
             glBufferSubData(GL_ARRAY_BUFFER, sizeof(float) * 6, sizeof(c.positions[0]) * c.positions.size(),  c.positions.data());
-
-            //glBufferSubData(GL_ARRAY_BUFFER, sizeof(float) * 3, sizeof(float) * 3, b.positions.data());
-            //glBufferSubData(GL_ARRAY_BUFFER, sizeof(float) * 6, sizeof(float) * 3, c.positions.data());
 
         }
 
