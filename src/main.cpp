@@ -2,6 +2,8 @@
 #include "util/gl.h"
 #include "SDL.h"
 #include "app/window.h"
+#include "shaders/Shader.h"
+#include "core/buffer.h"
 
 int main(int argc, char* argv[])
 {
@@ -15,6 +17,12 @@ int main(int argc, char* argv[])
     
     App::Window window("Title", 800, 600);
 
+	Shader::Shader shader;
+	Core::Buffer buffer;
+	buffer.init();
+	buffer.sendData();
+
+
 	SDL_Event event;
 
 	while (1) {
@@ -25,8 +33,13 @@ int main(int argc, char* argv[])
 			break;
 		}
 
+		
+		shader.use();
+
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(1.0, 1.0, 1.0, 1.0);
+
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
         SDL_GL_SwapWindow(window.getWindow());
 	}
