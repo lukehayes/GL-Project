@@ -3,11 +3,7 @@
 
 #include "util/gl.h"
 #include <vector>
-
-
-struct Vertex {
-    std::vector<float> positions;
-};
+#include "vertex.h"
 
 namespace Core {
     
