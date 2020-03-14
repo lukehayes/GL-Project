@@ -42,9 +42,7 @@ namespace Core {
             glGenBuffers(1, &m_vbo_id);
             glBindBuffer(GL_ARRAY_BUFFER, m_vbo_id);
 
-            glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 10, nullptr, GL_STATIC_DRAW);
-
-        
+            glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * MAX_BUFFER_SIZE, nullptr, GL_STATIC_DRAW);
         }
 
         void sendData() {
@@ -63,13 +61,16 @@ namespace Core {
             c.positions.push_back(0.5);
             c.positions.push_back(-0.5);
             c.positions.push_back(0.0);
+
+            float arr[3] = { 3.2,2.3,3.2 };
+            std::vector<float> p = { 2.3,4.5,1.2 };
                 
             glEnableVertexAttribArray(0);
             glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
             glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(a.positions[0]) * a.positions.size(),  a.positions.data());
-            glBufferSubData(GL_ARRAY_BUFFER, sizeof(float) * 3, sizeof(b.positions[0]) * b.positions.size(),  b.positions.data());
-            glBufferSubData(GL_ARRAY_BUFFER, sizeof(float) * 6, sizeof(c.positions[0]) * c.positions.size(),  c.positions.data());
+            glBufferSubData(GL_ARRAY_BUFFER, sizeof(b.positions[0]) * 3, sizeof(b.positions[0]) * b.positions.size(),  b.positions.data());
+            glBufferSubData(GL_ARRAY_BUFFER, sizeof(c.positions[0]) * 6, sizeof(c.positions[0]) * c.positions.size(),  c.positions.data());
 
         }
 
