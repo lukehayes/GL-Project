@@ -8,6 +8,8 @@ so that it mostly works in a cross platform way
 #ifdef _WIN32
     #define GLEW_STATIC
     #include "glew.h"
+#elif __linux__
+    #include "GL/glew.h"
 #elif __APPLE__
     #include "OpenGL/gl3.h"
 #endif
