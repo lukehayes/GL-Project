@@ -9,7 +9,7 @@ namespace IO {
 
 	std::string readFile(const std::string& file) {
 		std::stringstream buffer;
-		std::ifstream filestream(file);
+		std::ifstream filestream(file.c_str());
 
         buffer << filestream.rdbuf();
 
