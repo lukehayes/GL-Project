@@ -50,13 +50,14 @@ namespace App {
             m_context = SDL_GL_CreateContext(m_window);
 
 
-			if (_WIN32) {
+            #if _WIN32
 				GLenum error = glewInit();
 
 				if (!error == GLEW_OK) {
 					std::cout << "GLEW failed to initialize." << std::endl;
 				}
 			}
+            #endif
 
 		}
 	
