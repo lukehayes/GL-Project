@@ -2,7 +2,7 @@
 #include "util/gl.h"
 #include "SDL.h"
 #include "app/window.h"
-#include "shaders/Shader.h"
+#include "shaders/shader.h"
 #include "core/buffer.h"
 
 int main(int argc, char* argv[])
