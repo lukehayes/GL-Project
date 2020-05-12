@@ -6,7 +6,6 @@
 #include "util/gl.h"
 #include "util/glm.h"
 #include "util/log.h"
-#include "GL/glew.h"
 
 namespace Shader {
 

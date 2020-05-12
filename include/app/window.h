@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "SDL.h"
-#include "GL/glew.h"
+#include "util/gl.h"
 
 namespace App {
 
