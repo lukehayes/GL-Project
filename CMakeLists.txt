@@ -14,7 +14,7 @@ SET(PROGRAM_NAME "app")
 
 SET(CORE_INCLUDES
 	"${PROJECT_SOURCE_DIR}/include"
-	"${PROJECT_SOURCE_DIR}/deps/libs/glm"
+	"${PROJECT_SOURCE_DIR}/deps/libs/"
 )
 
 # ------------------------------------------------------
