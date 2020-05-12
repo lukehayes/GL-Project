@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : Top-level CMake project file, do global configuration
 # and include sub-projects here.
 #
-cmake_minimum_required (VERSION 3.7)
+cmake_minimum_required (VERSION 3.15)
 project ("app")
 
 # ------------------------------------------------------
@@ -10,23 +10,17 @@ project ("app")
 SET(SRC_DIR "src")
 SET(SRC_FILE "${SRC_DIR}/main.cpp")
 SET(LIBS_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
-SET(GLM_HEADERS_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
+SET(PROGRAM_NAME "app")
 
 SET(CORE_INCLUDES
 	"${PROJECT_SOURCE_DIR}/include"
-	"${GLM_HEADERS_DIR}"
+	"${PROJECT_SOURCE_DIR}/deps/libs/glm"
 )
-
-# All of the sub directory names found in the src folder
-SET(SRC_LIBS io)
-
 
 # ------------------------------------------------------
 # WINDOWS
 # ------------------------------------------------------
 if (WIN32)
-
-    message("Running on Windows")
 
     set(INC_DIRS
         ${PROJECT_SOURCE_DIR}/deps/libs/SDL/include
@@ -35,58 +29,47 @@ if (WIN32)
     )
 
     include_directories(${INC_DIRS})
-
-    link_directories(
-        ${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs
-        ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/libs
-     )
-
-    add_subdirectory("${PROJECT_SOURCE_DIR}/src/io")
+    link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
 
     # Add source to this project's executable.
-    add_executable (app "${SRC_FILE}")
+    add_executable ("${PROGRAM_NAME}" "${SRC_FILE}")
 
-    target_link_libraries(app SDL2main.lib)
-    target_link_libraries(app SDL2.lib io)
-    target_link_libraries(app glew32s.lib)
+    target_link_libraries("${PROGRAM_NAME}" SDL2.lib)
+    target_link_libraries("${PROGRAM_NAME}" SDL2main.lib)
 
 endif(WIN32)
 
+
 # ------------------------------------------------------
-# OSX
+# OSX | LINUX
 # ------------------------------------------------------
-if(APPLE)
-    message("Running on APPLE")
+if(APPLE OR UNIX)
 
     # Modules Path
     set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-    set(CMAKE_CXX_FLAGS "-std=c++14")
-
-    # Find SDL2 on OSX - must be at top
-    find_package (SDL2 REQUIRED)
-
-    include_directories(
-		${PROJECT_SOURCE_DIR}/include
-		${SDL2_INCLUDE_DIR}
-        ${GLM_HEADERS_DIR}
-    )
-
-    add_subdirectory("${PROJECT_SOURCE_DIR}/src/io")
 
     # Add source to this project's executable.
-    add_executable (app "${SRC_FILE}")
-    target_link_libraries (app ${SDL2_LIBRARIES} io)
-
-endif(APPLE)
+    add_executable ("${PROGRAM_NAME}" "${SRC_FILE}")
 
 
-# ------------------------------------------------------
-# NEDED FOR WINDOWS AND OSX
-# ------------------------------------------------------
-# FIND OPENGL
-# ------------------------------------------------------
-find_package (OPENGL)
-if (OPENGL_FOUND)
-  include_directories(${OPENGL_INCLUDE_DIR})
-  target_link_libraries (app ${OPENGL_LIBRARIES})
-endif (OPENGL_FOUND)
+    find_package (SDL2 REQUIRED)
+    find_package (OpenGL REQUIRED)
+    find_package (GLEW REQUIRED STATIC)
+
+    include_directories(
+		"${PROJECT_SOURCE_DIR}/include"
+        "${SDL2_INCLUDE_DIR}"
+        "${GLEW_INCLUDE_DIRS}"
+        "${OPENGL_INCLUDE_DIR}"
+		"${PROJECT_SOURCE_DIR}/deps/libs/"
+    )
+
+    add_subdirectory("${SRC_DIR}/io")
+    target_link_libraries ("${PROGRAM_NAME}" ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} io)
+    target_compile_features("${PROGRAM_NAME}" PUBLIC cxx_std_11)
+
+
+
+
+endif(APPLE OR UNIX)
+
