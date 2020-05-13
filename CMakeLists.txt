@@ -2,7 +2,7 @@
 # and include sub-projects here.
 #
 cmake_minimum_required (VERSION 3.15)
-project ("app")
+project ("app" CXX)
 
 # ------------------------------------------------------
 # Helper Variables
@@ -30,12 +30,34 @@ if (WIN32)
 
     include_directories(${INC_DIRS})
     link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
+    link_directories(${PROJECT_SOURCE_DIR}/deps/libs/GLEW/libs)
 
     # Add source to this project's executable.
     add_executable ("${PROGRAM_NAME}" "${SRC_FILE}")
 
-    target_link_libraries("${PROGRAM_NAME}" SDL2.lib)
-    target_link_libraries("${PROGRAM_NAME}" SDL2main.lib)
+    message(${CMAKE_CURRENT_SOURCE_DIR})
+    message(${CMAKE_CURRENT_SOURCE_DIR})
+
+    add_library(SDL2 SHARED IMPORTED)
+    set_target_properties(SDL2 PROPERTIES IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/SDL2.lib")
+
+    add_library(SDL2main SHARED IMPORTED)
+    set_target_properties(SDL2main PROPERTIES IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/SDL2main.lib")
+
+    add_library(glew STATIC IMPORTED)
+    set_target_properties(glew PROPERTIES IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/GLEW/libs/glew32s.lib")
+
+    add_subdirectory("${SRC_DIR}/io")
+
+    target_link_libraries(app 
+        "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/SDL2.lib"
+        "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/SDL2main.lib"
+        "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/GLEW/libs/glew32s.lib"
+        "opengl32.lib"
+        io
+    )
+
+
 
 endif(WIN32)
 
