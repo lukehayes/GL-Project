@@ -7,10 +7,16 @@ project ("app" CXX)
 # ------------------------------------------------------
 # Helper Variables
 # ------------------------------------------------------
+SET(PROGRAM_NAME "app")
+
 SET(SRC_DIR "src")
 SET(SRC_FILE "${SRC_DIR}/main.cpp")
 SET(LIBS_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
-SET(PROGRAM_NAME "app")
+
+SET(GLEW_INC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/GLEW/include/")
+SET(GLEW_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/GLEW/libs/")
+SET(SDL_INC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/include/")
+SET(SDL_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/")
 
 SET(CORE_INCLUDES
 	"${PROJECT_SOURCE_DIR}/include"
@@ -23,41 +29,27 @@ SET(CORE_INCLUDES
 if (WIN32)
 
     set(INC_DIRS
-        ${PROJECT_SOURCE_DIR}/deps/libs/SDL/include
-        ${PROJECT_SOURCE_DIR}/deps/libs/GLEW/include
-        ${CORE_INCLUDES}
+		"${GLEW_INC_DIR}"
+		"${SDL_INC_DIR}"
+        "${CORE_INCLUDES}"
     )
 
     include_directories(${INC_DIRS})
-    link_directories(${PROJECT_SOURCE_DIR}/deps/libs/SDL/libs)
-    link_directories(${PROJECT_SOURCE_DIR}/deps/libs/GLEW/libs)
+    link_directories("${SDL_LIB_DIR}")
+    link_directories("${GLEW_LIB_DIR}")
 
     # Add source to this project's executable.
     add_executable ("${PROGRAM_NAME}" "${SRC_FILE}")
 
-    message(${CMAKE_CURRENT_SOURCE_DIR})
-    message(${CMAKE_CURRENT_SOURCE_DIR})
-
-    add_library(SDL2 SHARED IMPORTED)
-    set_target_properties(SDL2 PROPERTIES IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/SDL2.lib")
-
-    add_library(SDL2main SHARED IMPORTED)
-    set_target_properties(SDL2main PROPERTIES IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/SDL2main.lib")
-
-    add_library(glew STATIC IMPORTED)
-    set_target_properties(glew PROPERTIES IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/GLEW/libs/glew32s.lib")
-
     add_subdirectory("${SRC_DIR}/io")
 
     target_link_libraries(app 
-        "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/SDL2.lib"
-        "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/SDL2main.lib"
-        "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/GLEW/libs/glew32s.lib"
+        "${SDL_LIB_DIR}SDL2.lib"
+        "${SDL_LIB_DIR}SDL2main.lib"
+        "${GLEW_LIB_DIR}glew32s.lib"
         "opengl32.lib"
         io
     )
-
-
 
 endif(WIN32)
 
