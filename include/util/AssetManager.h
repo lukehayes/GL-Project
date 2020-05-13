@@ -14,9 +14,25 @@ namespace Util {
 	public:
         AssetManager() {}
         ~AssetManager() {}
-
+        
+        /**
+         * Return the path to the folder where the shaders are located
+         *
+         * @return std::string
+         */
         static std::string shaderPath() {
             return "../assets/shaders/";
+        }
+        
+        /**
+         * Return the path of a specific shader file
+         *
+         * @param std::string shaderFile The shader that we want
+         *
+         * @return std::string
+         */
+        static std::string getShaderFile(const std::string& shaderFile) {
+            return "../assets/shaders/" + shaderFile;
         }
 
 	private:
