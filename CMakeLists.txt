@@ -72,11 +72,11 @@ if(APPLE OR UNIX)
     find_package (GLEW REQUIRED STATIC)
 
     include_directories(
-		"${PROJECT_SOURCE_DIR}/include"
+        "${PROJECT_INC_DIR}"
         "${SDL2_INCLUDE_DIR}"
         "${GLEW_INCLUDE_DIRS}"
         "${OPENGL_INCLUDE_DIR}"
-		"${PROJECT_SOURCE_DIR}/deps/libs/"
+        "${DEPS_LIBS_ROOT_DIR}"
     )
 
     add_subdirectory("${SRC_DIR}/io")
