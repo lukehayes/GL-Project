@@ -10,7 +10,7 @@ project ("app" CXX)
 SET(PROGRAM_NAME "app")
 
 SET(PROJECT_INC_DIR "${PROJECT_SOURCE_DIR}/include")
-SET(SRC_DIR "src")
+SET(SRC_DIR "${PROJECT_SOURCE_DIR}/src")
 SET(SRC_FILE "${SRC_DIR}/main.cpp")
 SET(DEPS_LIBS_ROOT_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
 
