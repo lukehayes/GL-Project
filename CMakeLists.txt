@@ -11,7 +11,7 @@ SET(PROGRAM_NAME "app")
 
 SET(SRC_DIR "src")
 SET(SRC_FILE "${SRC_DIR}/main.cpp")
-SET(DEPS_LIBS_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
+SET(DEPS_LIBS_ROOT_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
 
 SET(GLEW_INC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/GLEW/include/")
 SET(GLEW_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/GLEW/libs/")
@@ -20,7 +20,7 @@ SET(SDL_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/")
 
 SET(CORE_INCLUDES
 	"${PROJECT_SOURCE_DIR}/include"
-    "${DEPS_LIBS_DIR}"
+    "${DEPS_LIBS_ROOT_DIR}"
 )
 
 # ------------------------------------------------------
