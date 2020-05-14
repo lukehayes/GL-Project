@@ -20,7 +20,7 @@ SET(SDL_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/")
 
 SET(CORE_INCLUDES
 	"${PROJECT_SOURCE_DIR}/include"
-	"${PROJECT_SOURCE_DIR}/deps/libs/"
+    "${LIBS_DIR}"
 )
 
 # ------------------------------------------------------
@@ -43,7 +43,7 @@ if (WIN32)
 
     add_subdirectory("${SRC_DIR}/io")
 
-    target_link_libraries(app 
+    target_link_libraries(app
         "${SDL_LIB_DIR}SDL2.lib"
         "${SDL_LIB_DIR}SDL2main.lib"
         "${GLEW_LIB_DIR}glew32s.lib"
