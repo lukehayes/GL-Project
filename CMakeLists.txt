@@ -9,6 +9,7 @@ project ("app" CXX)
 # ------------------------------------------------------
 SET(PROGRAM_NAME "app")
 
+SET(PROJECT_INC_DIR "${PROJECT_SOURCE_DIR}/include")
 SET(SRC_DIR "src")
 SET(SRC_FILE "${SRC_DIR}/main.cpp")
 SET(DEPS_LIBS_ROOT_DIR "${PROJECT_SOURCE_DIR}/deps/libs")
@@ -19,7 +20,7 @@ SET(SDL_INC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/include/")
 SET(SDL_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/deps/libs/SDL/libs/")
 
 SET(CORE_INCLUDES
-	"${PROJECT_SOURCE_DIR}/include"
+    "${PROJECT_INC_DIR}"
     "${DEPS_LIBS_ROOT_DIR}"
 )
 
