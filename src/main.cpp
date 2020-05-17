@@ -22,6 +22,24 @@ int main(int argc, char* argv[])
 	buffer.init();
 	buffer.sendData();
 
+    
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 view = glm::mat4(1.0f);
+    glm::mat4 projection = glm::mat4(1.0f);
+
+    view = glm::lookAt(
+        
+        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3(0.0f, 0.0f, -0.1f),
+        glm::vec3(0.0f, 1.0f, 0.0f)
+
+    );
+
+    projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);  
+    
+    model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f));
+
+
 
 	SDL_Event event;
 
@@ -35,6 +53,10 @@ int main(int argc, char* argv[])
 
 		
 		shader.use();
+
+        shader.setMat4("model", model);
+        shader.setMat4("view", view);
+        shader.setMat4("projection", projection);
 
         glClear(GL_COLOR_BUFFER_BIT);
         glClearColor(0.2, 0.2, 0.2, 1.0);
