@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 		shader.use();
 
         glClear(GL_COLOR_BUFFER_BIT);
-        glClearColor(1.0, 1.0, 1.0, 1.0);
+        glClearColor(0.2, 0.2, 0.2, 1.0);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
